@@ -36,46 +36,15 @@ function searchCharacterPhoto(characterName: string): Promise<string[]> {
 }
 
 export default class API {
-  static getCharacters(): Promise<characterProps[]> {
-    return fetch(URL_CHARACTERS)
-      .then(handleResponseError)
-      .then(async (data) => {
-        if (data) {
-          const characters = data.results || [];
-          const charactersWithImages = await Promise.all(
-            characters.map(async (character: character) => {
-              if (data) {
-                const photoUrls = await searchCharacterPhoto(character.name);
-                return {
-                  ...character,
-                  image:
-                    photoUrls.length > 0
-                      ? photoUrls[0]
-                      : 'https://placehold.co/600x400',
-                };
-              } else {
-                return character;
-              }
-            }),
-          );
-          return charactersWithImages;
-        } else {
-          return [];
-        }
-      })
-      .catch((error) => {
-        console.log(error.message);
-        throw error;
-      });
-  }
   static getCharactersByName(characterName: string): Promise<characterProps[]> {
     return fetch(`${URL_CHARACTERS}?search=${characterName}`)
       .then(handleResponseError)
       .then(async (data) => {
         if (data) {
-          const characters = data.results || [];
+          const characters = data || [];
+
           const charactersWithImages = await Promise.all(
-            characters.map(async (character: character) => {
+            characters.results.map(async (character: character) => {
               if (data) {
                 const photoUrls = await searchCharacterPhoto(character.name);
                 return {
