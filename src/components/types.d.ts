@@ -18,3 +18,7 @@ interface UnsplashResult {
     regular: string;
   };
 }
+
+interface SearchBarProps {
+  onSearch: (name: string) => void;
+}
