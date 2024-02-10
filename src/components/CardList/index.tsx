@@ -1,6 +1,6 @@
 import React from 'react';
 import CardItem from '../CardItem';
-import './index.scss'
+import './index.scss';
 
 const CardList: React.FC<{ characters: characterProps[] }> = ({
   characters,
