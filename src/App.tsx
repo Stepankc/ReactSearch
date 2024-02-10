@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import './assets/global.scss';
 import API from './api/Api';
 import CardList from './components/CardList';
